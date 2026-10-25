@@ -1,4 +1,5 @@
 name: Clone my voice (encrypted output)
+
 on:
   workflow_dispatch:
     inputs:
@@ -11,11 +12,14 @@ on:
         required: true
         type: choice
         options: [English, Chinese, Japanese, Korean, German, French, Russian, Portuguese, Spanish, Italian]
+
 permissions:
   contents: read
+
 concurrency:
   group: voice-clone-${{ github.ref }}
   cancel-in-progress: false
+
 jobs:
   synthesize:
     name: Generate speech and encrypt output
@@ -44,11 +48,11 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
           python -m pip install -r requirements.txt
-      - name: Generate speech
+      - name: Generate voice clone
         run: python scripts/clone_voice.py
-      - name: Encrypt output before upload
+      - name: Encrypt output for owner
         run: python scripts/encrypt_output.py
-      - name: Upload encrypted artifact only
+      - name: Upload encrypted result only
         uses: actions/upload-artifact@v4
         with:
           name: encrypted-voice-output

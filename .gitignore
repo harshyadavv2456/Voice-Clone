@@ -1,3 +1,4 @@
+# Never commit plaintext voice data, generated audio, or private keys
 *.wav
 *.mp3
 *.m4a

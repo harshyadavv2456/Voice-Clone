@@ -1,1 +1,4 @@
-qwen-tts\nfaster-whisper\nsoundfile\ncryptography\n
+qwen-tts
+faster-whisper
+soundfile
+cryptography
