@@ -4,6 +4,9 @@ This project is intended to create a fine-tuned standalone Qwen3-TTS checkpoint 
 
 ## Status
 
+Open the [GPU training notebook in Colab](https://colab.research.google.com/github/harshyadavv2456/Voice-Clone/blob/main/training/voice_model_colab.ipynb) for the guided flow. Upload your own recordings to the notebook's private Google Drive dataset folder, review/correct the generated transcript manifest, then run fine-tuning and private export.
+
+
 No personal checkpoint exists yet. This repo now has the fine-tuning and serving scripts, but actual training requires a CUDA GPU run. The current ~45-second reference recording is too small for a strong general-purpose personal voice model. A practical starting target is around 10–30 minutes of clean varied speech with transcripts corrected by a human; this is guidance, not a vendor-mandated minimum.
 
 Official single-speaker fine-tuning docs: https://github.com/QwenLM/Qwen3-TTS/blob/main/finetuning/README.md
