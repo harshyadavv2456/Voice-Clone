@@ -5,10 +5,11 @@ import requests
 
 BASE_URL = "http://127.0.0.1:8765"
 
-def speak(text: str, output_file: str | Path = "speech.wav") -> Path:
+def speak(text: str, output_file: str | Path = "speech.wav", language: str = "English") -> Path:
     response = requests.post(
         f"{BASE_URL}/v1/audio/speech",
-        json={"model": "harsh-voice", "input": text, "voice": "harsh_yadav", "response_format": "wav"},
+        json={"model": "harsh-voice", "input": text, "voice": "harsh_yadav",
+              "language": language, "response_format": "wav"},
         timeout=600,
     )
     response.raise_for_status()
