@@ -1,0 +1,16 @@
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.ogg
+*.vcenc
+*.pem
+identity.txt
+VOICE_SOURCE_KEY.txt
+VOICE_OUTPUT_PRIVATE.pem
+output/
+work/
+artifact/
+__pycache__/
+.venv/
+.env
