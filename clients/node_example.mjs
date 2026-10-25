@@ -8,6 +8,7 @@ const response = await fetch("http://127.0.0.1:8765/v1/audio/speech", {
     model: "harsh-voice",
     input: "Hello from a future project, spoken with my personal voice.",
     voice: "harsh_yadav",
+    language: "English",
     response_format: "wav"
   })
 });
