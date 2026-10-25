@@ -15,3 +15,18 @@ artifact/
 __pycache__/
 .venv/
 .env
+
+# Fine-tuning data, checkpoints, downloaded model weights and auth material
+data/
+models/
+model-output/
+output/
+model-output/
+vendor/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.jsonl
+.env.*
