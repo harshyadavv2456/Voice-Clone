@@ -12,6 +12,7 @@ from qwen_tts import Qwen3TTSModel
 
 MODEL_PATH = Path(os.environ.get("VOICE_MODEL_PATH", "models/harsh-yadav-qwen3-voice")).expanduser()
 SPEAKER_NAME = os.environ.get("VOICE_SPEAKER", "harsh_yadav")
+DEFAULT_LANGUAGE = os.environ.get("VOICE_LANGUAGE", "English")
 HOST = os.environ.get("VOICE_API_HOST", "127.0.0.1")
 PORT = int(os.environ.get("VOICE_API_PORT", "8765"))
 
@@ -37,11 +38,13 @@ class SpeechRequest(BaseModel):
     model: str = "harsh-voice"
     input: str = Field(min_length=1, max_length=5000)
     voice: str = SPEAKER_NAME
+    language: str = DEFAULT_LANGUAGE
     response_format: str = "wav"
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "model_loaded": True, "device": DEVICE, "speaker": SPEAKER_NAME}
+    return {"status": "ok", "model_loaded": True, "device": DEVICE,
+            "speaker": SPEAKER_NAME, "language": DEFAULT_LANGUAGE}
 
 @app.post("/v1/audio/speech")
 def create_speech(req: SpeechRequest):
@@ -52,7 +55,9 @@ def create_speech(req: SpeechRequest):
         raise HTTPException(status_code=400, detail="Input text cannot be empty.")
     try:
         with _generation_lock:
-            wavs, sample_rate = model.generate_custom_voice(text=text, speaker=req.voice)
+            wavs, sample_rate = model.generate_custom_voice(
+                text=text, language=req.language, speaker=req.voice
+            )
         if not wavs:
             raise RuntimeError("The model returned no waveform.")
         buff = io.BytesIO()
